@@ -31,8 +31,8 @@ public class ExchangeService {
 
     public ExchangePojo findExchange(BigInteger id) {
         Optional<Exchange> exchange = exchangeRepository.findById(id);
-        exchange.ifPresent(val ->
-                typeCast(val));
+        exchange.ifPresent(this::
+                typeCast);
         if (exchange.isPresent()) {
             return typeCast(exchange.get());
         }
@@ -51,7 +51,8 @@ public class ExchangeService {
     }
 
     public List<ExchangePojo> listExchanges() {
-        return exchangeRepository.findAll().stream().map(val -> typeCast(val)).toList();
+        return exchangeRepository.findAll().stream().map(this::
+                typeCast).toList();
     }
 
     private void typeCast(Exchange exchange, ExchangePojo exchangePojo) {
@@ -90,6 +91,7 @@ public class ExchangeService {
 
     public List<ExchangePojo> findExchangeByCountry(BigInteger id) {
 
-        return exchangeRepository.getExchangesByCountry(id).stream().map(val -> typeCast(val)).toList();
+        return exchangeRepository.getExchangesByCountry(id).stream().map(this::
+                typeCast).toList();
     }
 }
